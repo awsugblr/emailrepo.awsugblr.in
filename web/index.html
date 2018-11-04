@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <title>Login - Lambda101</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<link href="./css/nsans.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div class="login" >
+			<img src="./img/lambda.png" style="border-width:0px;max-width:35vw;max-height: 35vw;margin-left: 19px;">
+			<div class="row tag-margin">
+				<p id="error" class="tag-margin">*Please enter the correct Username/Password.</p>
+			</div>
+			<form method="GET">
+				<div class="row tag-margin">
+					<div class="col-sm-4 label-style">Email : </div>
+					<div class="col-sm-8" style="margin-left: -41px;">
+						<input class="common-style-input set-width" id="email" type="text" name="email" value="" maxlength="30" autofocus/>
+					</div>
+				</div>
+				<div class="row tag-margin">
+					<div class="col-sm-4 label-style">Password : </div>
+					<div class="col-sm-8" style="margin-left: -41px;">
+						<input class="common-style-input set-width" id="pwd" type="password" name="password" maxlength="15"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4" style="margin:auto;">
+						<button type="button" class="btn btn-primary btn-block btn-large" onclick="login({email : email.value,password : password.value})" id="login-submit">Login</button>
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12" style="text-align:center;padding-top:10px;">Not a registered user? <a href="register_login.html">click here to register</a></div>
+				</div>
+			</form>
+		</div>
+		<script src="js/Sha256Logic.js"></script>
+		<script src="js/lambda101.js"></script>
+	</body>
+</html>
