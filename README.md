@@ -1,2 +1,2 @@
 # emailrepo
-Basic email repository of awsugblr contacts
+Basic email repository of AWSUGBLR contacts

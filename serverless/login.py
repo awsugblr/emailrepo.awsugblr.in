@@ -4,13 +4,13 @@ def login(email, password):
     connection, cursor = None, None
     try:
         #Database Connection Parameters - Replace this with your DB endpoint
-        lambda101_cnx_str = {'host': 'dbnode.cemnrzna330w.ap-south-1.rds.amazonaws.com',
+        awsugblr_cnx_str = {'host': 'dbnode.cemnrzna330w.ap-south-1.rds.amazonaws.com',
            'username': 'user',
            'password': 'password',
            'db': 'dbname'}
-        connection = mysql.connector.connect(host=lambda101_cnx_str['host'], user=lambda101_cnx_str['username'],
-                                             password=lambda101_cnx_str['password'], database=lambda101_cnx_str['db'])
-        # Check if user exists
+        connection = mysql.connector.connect(host=awsugblr_cnx_str['host'], user=awsugblr_cnx_str['username'],
+                                             password=awsugblr_cnx_str['password'], database=awsugblr_cnx_str['db'])
+        # Check if user/password is a match
         sql = "SELECT User_ID FROM Users WHERE Email_Address='%s' and Password='%s'" % (email, password)
         cursor = connection.cursor()
         cursor.execute(sql)
