@@ -1,0 +1,6 @@
+{
+    "host": "dbnode.cemnrzna330w.ap-south-1.rds.amazonaws.com",
+    "username": "user",
+    "password": "password",
+    "db": "dbname"
+}

@@ -1,24 +1,28 @@
 import mysql.connector
+import json
+
+dbconparamsjson = None
+
+def get_db_con_params():
+    global dbconparamsjson
+    jsondata = open("./common/DBConParams.json").read()
+    dbconparamsjson = json.loads(jsondata)
 
 def login(email, password):
     connection, cursor = None, None
     try:
         #Database Connection Parameters - Replace this with your DB endpoint
-        awsugblr_cnx_str = {'host': 'dbnode.cemnrzna330w.ap-south-1.rds.amazonaws.com',
-           'username': 'user',
-           'password': 'password',
-           'db': 'dbname'}
-        connection = mysql.connector.connect(host=awsugblr_cnx_str['host'], user=awsugblr_cnx_str['username'],
-                                             password=awsugblr_cnx_str['password'], database=awsugblr_cnx_str['db'])
+        connection = mysql.connector.connect(host=dbconparamsjson["host"], user=dbconparamsjson["username"],
+                                             password=dbconparamsjson["password"], database=dbconparamsjson["db"])
         # Check if user/password is a match
         sql = "SELECT User_ID FROM Users WHERE Email_Address='%s' and Password='%s'" % (email, password)
-        cursor = connection.cursor()
+        cursor = connection.cursor(buffered=True)
         cursor.execute(sql)
-        (user_id, ) = cursor.fetchall()
+        user_id = cursor.fetchone()
         if user_id:
-            return {"result": "true", "uid": user_id[0]}
+            return {"result": True, "uid": user_id[0]}
         else:
-            return {"result": "false"}
+            return {"result": False}
     except mysql.connector.Error as err:
         return {"result": err}
     finally:
@@ -31,4 +35,5 @@ def login(email, password):
 def lambda_handler(event, context):
     email = event['email']
     password = event['password']
+    get_db_con_params()
     return login(email, password)
