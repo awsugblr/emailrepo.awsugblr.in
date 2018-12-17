@@ -8,7 +8,7 @@ def get_db_con_params():
     jsondata = open("./common/DBConParams.json").read()
     dbconparamsjson = json.loads(jsondata)
 
-def add(email, password):
+def listall(email, password):
     connection, cursor = None, None
     try:
         #Database Connection Parameters - Replace this with your DB endpoint
@@ -36,4 +36,4 @@ def lambda_handler(event, context):
     email = event['email']
     password = event['password']
     get_db_con_params()
-    return add(email, password)
+    return listall(email, password)
