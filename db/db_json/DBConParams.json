@@ -1,0 +1,6 @@
+{
+    "host": "emailrepo.test.ap-south-1.rds.amazonaws.com",
+    "username": "root",
+    "password": "password",
+    "db": "emailrepo"
+}

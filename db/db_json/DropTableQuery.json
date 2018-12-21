@@ -1,0 +1,12 @@
+[
+    {
+        "sql": "DROP TABLE Users;",
+        "table": "Users",
+        "execute": "y"
+    },
+    {
+        "sql": "DROP TABLE Contacts;",
+        "table": "Contacts",
+        "execute": "y"
+    }
+]

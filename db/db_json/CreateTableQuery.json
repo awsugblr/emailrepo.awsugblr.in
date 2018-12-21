@@ -1,0 +1,12 @@
+[
+    {
+        "sql": "CREATE TABLE Users (UserID DOUBLE NOT NULL AUTO_INCREMENT PRIMARY KEY, FullName VARCHAR(35) NOT NULL, EmailAddress VARCHAR(35) NOT NULL, Password VARCHAR(70) NOT NULL);",
+        "table": "Users",
+        "execute": "y"
+    },
+    {
+        "sql": "CREATE TABLE Contacts (ContactID DOUBLE NOT NULL AUTO_INCREMENT PRIMARY KEY, EmailAddress VARCHAR(100) NOT NULL, FirstName VARCHAR(50), LastName VARCHAR(50), DNDEmailBounce BOOLEAN, Comments VARCHAR(250));",
+        "table": "Contacts",
+        "execute": "y"
+    }
+]
