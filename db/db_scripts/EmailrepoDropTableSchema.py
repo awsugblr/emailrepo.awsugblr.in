@@ -78,4 +78,4 @@ if __name__ == '__main__':
     write_drop_table_files()
     write_invoke_drop_table_schema()
 
-    print("FunnelConfig Schema DROP TABLE files generation complete!")
+    print("Emailrepo Schema DROP TABLE files generation complete!")
