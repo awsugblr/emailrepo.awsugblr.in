@@ -78,4 +78,4 @@ if __name__ == '__main__':
     write_create_table_files()
     write_invoke_create_table_schema()
 
-    print("FunnelConfig Schema CREATE TABLE files generation complete!")
+    print("Emailrepo Schema CREATE TABLE files generation complete!")
