@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Dashboard</title>
+		<link rel="icon" href="img/Bi2i-square-logo-500x500.png" type="image/png" sizes="16x16">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="./css/nsans.css" rel="stylesheet" type="text/css">
+		<style>
+
+		</style>
+		<!--Custom Font-->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"><img id="logo" src="./img/SNAuth1.png"></a>
+					<div style="float:right;">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a style="width:auto;padding-top:5px;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-user-circle" style="font-size:26px;"></i>
+									<span id="uname"> User </span><span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="" id="logout" class="btn btn-link btn-logout">Logout</a>
+									</li>
+								</ul>
+							</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div><!-- /.container-fluid -->
+		</nav>
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<div class="divider"></div>
+			<ul class="nav menu">
+				<li><a href="./users.html">Active Users</a></li>
+				<li><a href="./request_users.html">Login Requests</a></li>
+				<li class="active"><a href="./blocked_users.html">Blocked Users</a></li>
+				<li><a href="./generate_license.html">Generate License</a></li>
+			</ul>
+		</div><!--/.sidebar-->
+
+		<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+			<div class="row">
+				<div class="col-lg-12" style="margin: -10px 0px;">
+					<h1 class="page-header">Blocked Users</h1>
+				</div>
+			</div><!--/.row-->
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-responsive">
+						<table id="users-list" class="table">
+							<thead style="background-color: #019847;color:white;">
+								<tr>
+									<th>#</th>
+									<th>Name</th>
+									<th>Email Address</th>
+									<th>Comments</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+				</div><!--/.col-->
+
+				<div class="col-sm-12 footer">
+                    <p class="back-link">&#169; <span id="cur-year"></span> All rights reserved. <a style="text-decoration:none;color:white;" href="http://bridgei2i.com/">BRIDGEi2i Analytics Solutions</a></span></p>
+				</div>
+			</div><!--/.row-->
+		</div>	<!--/.main-->
+	
+    <script>
+        $(document).ready(function(){
+        	checkEnvironment();
+        	listBlockedUsers();
+        });
+    </script>
+    <script src="js/ValidateUrl.js"></script>
+    <script src="js/Snauth.js"></script>
+    </body>
+</html>

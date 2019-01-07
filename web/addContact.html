@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Dashboard</title>
+		<link rel="icon" href="img/Bi2i-square-logo-500x500.png" type="image/png" sizes="16x16">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="./css/nsans.css" rel="stylesheet" type="text/css">
+		<style>
+
+		</style>
+		<!--Custom Font-->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"><img id="logo" src="./img/SNAuth1.png"></a>
+					<div style="float:right;">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a style="width:auto;padding-top:5px;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-user-circle" style="font-size:26px;"></i>
+									<span id="uname"> User </span><span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="" id="logout" class="btn btn-link btn-logout">Logout</a>
+									</li>
+								</ul>
+							</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div><!-- /.container-fluid -->
+		</nav>
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<div class="divider"></div>
+			<ul class="nav menu">
+				<li><a href="./users.html">Active Users</a></li>
+				<li><a href="./request_users.html">Login Requests</a></li>
+				<li><a href="./blocked_users.html">Blocked Users</a></li>
+				<li class="active"><a href="./generate_license.html">Generate License</a></li>
+			</ul>
+		</div><!--/.sidebar-->
+
+        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+			<div class="row">
+				<div class="col-lg-12" style="margin: -10px 0px;">
+					<h1 class="page-header">Generate SNAuth License</h1>
+				</div>
+			</div><!--/.row-->
+
+			<div class="row">
+				<div class="col-md-12">
+
+                    <div class="snauth-page">
+                        <form>
+                            <p id="common-error">Error : Enter Valid Email_ID</p>
+                            <div class="row">
+                                <div id="email-input" class="col-md-2">*Email :</div>
+                                <input class="col-md-7 common-style-input set-email-style" type="text" id="email" required="required" autofocus/>
+                                <div class="col-md-1 tooltip t-tip">
+                                    <a href="#"><span class="fa fa-info-circle"></span></a>
+                                    <span class="tooltiptext" style="width: 200px;margin-left: -100%;">Mention the customer email with which Serial No, Auth Code and License Key will be generated</span>
+                                </div>
+                                <button class="col-md-2 common-style-input btn-size" id="submit">Submit</button>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div id="show-serial-no" class="row">
+                                <div class="col-md-6">SerialNo :</div>
+                                <div class="col-md-6" id="serial-no"></div>
+                            </div>
+
+                            <div id="show-auth-code" class="row">
+                                <div class="col-md-6">AuthCode :</div>
+                                <div class="col-md-6" id = "auth-code"></div>
+                            </div>
+
+                            <div id="expiry" class="row">
+                                <div class="col-md-6">Expiry :</div>
+                                <div class="col-md-6" id="sn-expiry-date"></div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div id="show-license" class="row">
+                                <p style="padding-left: 10px;">*Generate the associated license numbers</p>
+                            </div>
+
+                            <div id="license-choice" class="row">
+                                <div class="col-md-3">
+                                    <input type="radio" id="ICB" class="sh-ckb" onclick="disAll()" name="LT"> PM
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="ECB" class="sh-ckb" onclick="disAll()" name="LT"> Extrack
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="RCBN" class="sh-ckb" onclick="disAll()" name="LT"> Reco
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="CCB" class="sh-ckb" onclick="disAll()" name="LT"> Computer Vision
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="SCB" class="sh-ckb" onclick="disAll()" name="LT"> SDE
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div id="license-period-time" class="row">
+                                <p style="padding-left: 10px;">*License Period</p>
+                            </div>
+
+                            <div id="license-period" class="row">
+                                <div class="col-md-3">
+                                    <input type="radio" id="trial" class="lp-rbtn" name="lp" value="1"/> Trial (30 Days)
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="three-months" class="lp-rbtn" name="lp" value="3"/> 3 Month
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="six-months" class="lp-rbtn" name="lp" value="6"/> 6 Month
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="radio" id="one-year" class="lp-rbtn" name="lp" value="12"/> 1 Year
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div id="show-pm-lkey" class="row">
+                                <div class="col-md-6">PM License key :</div>
+                                <div class="col-md-6" id="pm-lkey"></div>
+                            </div>
+
+                            <div id="show-ext-lkey" class="row">
+                                <div class="col-md-6">Extrack License key :</div>
+                                <div class="col-md-6" id="ext-lkey"></div>
+                            </div>
+
+                            <div id="show-reco-lkey" class="row">
+                                <div class="col-md-6">Reco License key :</div>
+                                <div class="col-md-6" id="reco-lkey"></div>
+                            </div>
+
+                            <div id="show-sd-lkey" class="row">
+                                <div class="col-md-6">SDE License key :</div>
+                                <div class="col-md-6" id="sd-lkey"></div>
+                            </div>
+
+                            <div id="show-cv-lkey" class="row">
+                                <div class="col-md-6">Computer Vision License key :</div>
+                                <div class="col-md-6" id="cv-lkey"></div>
+                            </div>
+
+                            <div id="license-ex-date" class="row">
+                                <div class="col-md-6">License Expiry Date :</div>
+                                <div class="col-md-6" id="lex-date"></div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div id="comment-section" class="row">
+                                <label style="padding-left: 10px;">*Comment :
+                                    <div class="tooltip t-tip">
+                                        <a href="#"><span class="fa fa-info-circle"></span></a>
+                                        <span class="tooltiptext" style="width: 200px;margin-left: -100%;">Provide your name, customer info and other relevant details that can act as an audit trail for license generation</span>
+                                    </div>
+                                </label>
+                                <div class="col-md-12" style="padding-right: 0;">
+                                    <textarea id="comment" rows="4"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <div class="row">
+                                <div class="col-md-12" style="padding-right: 0;">
+                                    <input type="button" id="update" class="col-md-2 common-style-input btn-size" name="update" value="Submit">
+                                    <input type="button" id="generate" class="col-md-2 common-style-input btn-size" name="generate" value="Generate">
+                                    <input type="button" id="regenerate" class="col-md-3 common-style-input btn-size" name="regenerate" value="Regenerate">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+				</div><!--/.col-->
+
+				<div class="col-sm-12 footer">
+                    <p class="back-link">&#169; <span id="cur-year"></span> All rights reserved. <a style="text-decoration:none;color:white;" href="http://bridgei2i.com/">BRIDGEi2i Analytics Solutions</a></span></p>
+				</div>
+			</div><!--/.row-->
+		</div>	<!--/.main-->
+    <script>
+        $(document).ready(function(){
+            checkEnvironment();
+            localStorage.setItem("redirect_url", window.location.href);
+            var user_id = localStorage.getItem("snauth_user_id");
+            var uname = " " + (localStorage.getItem("user_name")).charAt(0).toUpperCase() + (localStorage.getItem("user_name")).slice(1) + " ";
+            $("#uname").text(uname);
+            var role = localStorage.getItem("user_role");
+            if(role !== "admin"){
+                if(role == "user"){
+                    window.location = './snauth.html';
+                }
+                else{
+                    window.location = './index.html';
+                }
+            }
+        })
+
+        $("#regenerate").click(function(){
+            window.location = './generate_license.html';
+        });
+    </script>
+    <script src="js/ValidateUrl.js"></script>
+    <script src="js/Snauth.js"></script>
+    </body>
+</html>
