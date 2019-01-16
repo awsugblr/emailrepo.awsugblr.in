@@ -1,5 +1,6 @@
 import mysql.connector
 import json
+import os
 
 dbconparamsjson = None
 
@@ -15,12 +16,12 @@ def login(email, password):
         connection = mysql.connector.connect(host=dbconparamsjson["host"], user=dbconparamsjson["username"],
                                              password=dbconparamsjson["password"], database=dbconparamsjson["db"])
         # Check if user/password is a match
-        sql = "SELECT User_ID FROM Users WHERE Email_Address='%s' and Password='%s'" % (email, password)
+        sql = "SELECT UserID FROM Users WHERE EmailAddress='%s' and Password='%s'" % (email, password)
         cursor = connection.cursor(buffered=True)
         cursor.execute(sql)
-        user_id = cursor.fetchone()
-        if user_id:
-            return {"result": True, "uid": user_id[0]}
+        userid = cursor.fetchone()
+        if userid:
+            return {"result": True, "uid": userid[0]}
         else:
             return {"result": False}
     except mysql.connector.Error as err:

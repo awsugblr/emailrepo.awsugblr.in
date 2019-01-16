@@ -7,7 +7,7 @@ function login(auth_details)
         $("#error").css('visibility', 'hidden');
         passwordValue = SHA256(auth_details.password)
         //API Endpoint - Replace this with endpoint you created
-        login_url = 'https://123abcdef789.execute-api.ap-south-1.amazonaws.com/lambda101/login';
+        login_url = 'https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/login';
         var obj = new Object();
         obj.email = auth_details.email;
         obj.password = passwordValue;
@@ -16,6 +16,7 @@ function login(auth_details)
 
         $.ajax({
             url: login_url,
+            headers: { "X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG" },
             type: 'POST',
             data: jsonObj,
             dataType: 'json',
@@ -23,13 +24,13 @@ function login(auth_details)
             {
                 login_success = result['result'];
                 //store userid in browser local storage
-                if (typeof(Storage) !== "undefined") {
-                    localStorage.setItem("user_id", result['uid']);
-                }
-
-                if(login_success === "true"){
+                // if (typeof(Storage) !== "undefined") {
+                //     localStorage.setItem("user_id", result['uid']);
+                // }
+                console.log(login_success);
+                if(login_success === true){
                     uid = result['uid']
-                    window.location = './users.html';
+                    window.location = './activeContacts.html';
                 }else{
                     $("#error").text("*Invalid credentials");
                     $("#error").css('visibility', 'visible');
