@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>AWSUGBLR - Email Repo Login</title>
+		<title>AWSUGBLR - Email Repo</title>
+		<link rel="icon" href="img/awsugblr-square-logo-500x500.png" type="image/png" sizes="16x16">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 		<script src="js/jquery.min.js"></script>
@@ -11,7 +12,7 @@
 	</head>
 	<body>
 		<div class="login" >
-			<img src="./img/awsugblr.png" style="border-width:0px;max-width:35vw;max-height: 35vw;margin-left: 19px;">
+			<img src="./img/awsugblr_emailrepo.png" style="border-width:0px;max-width:35vw;max-height: 35vw;margin-left: 19px;">
 			<div class="row tag-margin">
 				<p id="error" class="tag-margin">*Please enter the correct Username/Password.</p>
 			</div>
@@ -19,13 +20,13 @@
 				<div class="row tag-margin">
 					<div class="col-sm-4 label-style">Email : </div>
 					<div class="col-sm-8" style="margin-left: -41px;">
-						<input class="common-style-input set-width" id="email" type="text" name="email" value="" maxlength="30" autofocus/>
+						<input class="common-style-input set-width" id="email" type="text" name="email" value="@awsugblr.in" maxlength="30" autofocus/>
 					</div>
 				</div>
 				<div class="row tag-margin">
 					<div class="col-sm-4 label-style">Password : </div>
 					<div class="col-sm-8" style="margin-left: -41px;">
-						<input class="common-style-input set-width" id="pwd" type="password" name="password" maxlength="15"/>
+						<input class="common-style-input set-width" id="pwd" type="password" name="password" maxlength="15" onkeypress="onKeyPressLogin(event)"/>
 					</div>
 				</div>
 				<div class="row">
@@ -37,6 +38,7 @@
 				</div>
 			</form>
 		</div>
+		<script src="js/login.js"></script>
 		<script src="js/sha256logic.js"></script>
 		<script src="js/awsugblr.js"></script>
 	</body>
