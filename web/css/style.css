@@ -59,7 +59,8 @@ input.form-control {
   box-shadow: inset 0px 0px 0px 1px #30a5ff; }
 
 .navbar-custom {
-  background: #222;
+  /* background: #222; */
+  background: rgb(255, 255, 255);
   height: 60px; }
 
 .navbar-header .navbar-brand {
@@ -91,14 +92,16 @@ input.form-control {
   border-radius: 4px; }
 
 .dropdown a.dropdown-toggle {
-  color: #fff;
+  /* color: #fff; */
+  color: rgb(0, 0, 0)
   height: 40px;
   width: 40px;
   padding-top: 11px;
   padding-left: 9px; }
 
 .dropdown:hover {
-  color: #fff;
+  /* color: #fff; */
+  color: rgb(0, 0, 0)
   }
 
 .dropdown .label {
