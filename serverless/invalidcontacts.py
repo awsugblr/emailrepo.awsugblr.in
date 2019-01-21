@@ -8,21 +8,23 @@ def get_db_con_params():
     jsondata = open("./common/DBConParams.json").read()
     dbconparamsjson = json.loads(jsondata)
 
-def list(email, password):
+def invalidcontacts():
     connection, cursor = None, None
     try:
-        #Database Connection Parameters - Replace this with your DB endpoint
+        contacts = []
         connection = mysql.connector.connect(host=dbconparamsjson["host"], user=dbconparamsjson["username"],
                                              password=dbconparamsjson["password"], database=dbconparamsjson["db"])
-        # Check if user/password is a match
-        sql = "SELECT User_ID FROM Users WHERE Email_Address='%s' and Password='%s'" % (email, password)
-        cursor = connection.cursor(buffered=True)
+        # Get all invalid contacts
+        sql = "SELECT * FROM Contacts WHERE DNDEmailBounce=1"
+        cursor = connection.cursor()
         cursor.execute(sql)
-        user_id = cursor.fetchone()
-        if user_id:
-            return {"result": True, "uid": user_id[0]}
+        columns = [column[0] for column in cursor.description]
+        for row in cursor.fetchall():
+            contacts.append(dict(zip(columns, row)))
+        if len(contacts) > 0:
+            return {"result": contacts}
         else:
-            return {"result": False}
+            return {"result": None}
     except mysql.connector.Error as err:
         return {"result": err}
     finally:
@@ -33,7 +35,5 @@ def list(email, password):
 
 
 def lambda_handler(event, context):
-    email = event['email']
-    password = event['password']
     get_db_con_params()
-    return list(email, password)
+    return invalidcontacts()

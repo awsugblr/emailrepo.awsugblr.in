@@ -61,7 +61,7 @@ input.form-control {
 .navbar-custom {
   /* background: #222; */
   background: rgb(255, 255, 255);
-  height: 60px; }
+  height: 65px; }
 
 .navbar-header .navbar-brand {
   color: #fff;
@@ -394,7 +394,11 @@ tbody tr:nth-child(odd){
 }
 
 #email-input {
+    margin-top: 5px;
+    font-size: 18px;
+}
 
+#fullname-input {
     margin-top: 5px;
     font-size: 18px;
 }

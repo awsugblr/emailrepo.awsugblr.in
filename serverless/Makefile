@@ -8,3 +8,6 @@ lambda:
 
 clean:
 	rm -f login.zip
+	rm -f activecontacts.zip
+	rm -f addnewcontact.zip
+	rm -f invalidcontacts.zip
