@@ -394,7 +394,11 @@ tbody tr:nth-child(odd){
 }
 
 #email-input {
+    margin-top: 5px;
+    font-size: 18px;
+}
 
+#fullname-input {
     margin-top: 5px;
     font-size: 18px;
 }

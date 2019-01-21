@@ -5,7 +5,7 @@
         "execute": "y"
     },
     {
-        "sql": "CREATE TABLE Contacts (ContactID DOUBLE NOT NULL AUTO_INCREMENT PRIMARY KEY, EmailAddress VARCHAR(100) NOT NULL, FirstName VARCHAR(50), LastName VARCHAR(50), DNDEmailBounce BOOLEAN, Comments VARCHAR(250));",
+        "sql": "CREATE TABLE Contacts (ContactID DOUBLE NOT NULL AUTO_INCREMENT PRIMARY KEY, EmailAddress VARCHAR(100) NOT NULL, FullName VARCHAR(100), DNDEmailBounce BOOLEAN, Comments VARCHAR(150));",
         "table": "Contacts",
         "execute": "y"
     }

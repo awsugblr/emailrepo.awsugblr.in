@@ -1,6 +1,6 @@
 import os
 
-files = ["login.py"]
+files = ["login.py", "activecontacts.py", "invalidcontacts.py", "addnewcontact.py"]
 
 try:
     # remove mysql unzipped folder if exist
