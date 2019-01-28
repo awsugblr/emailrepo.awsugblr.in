@@ -333,7 +333,7 @@ tbody tr:nth-child(odd){
     width: 100px;
     visibility: hidden;
     color:white;
-    background-color: #4ef71b;
+    background-color: black;
     text-align: center;
     border-radius: 6px;
     padding: 5px;

@@ -22,11 +22,11 @@ def invalidcontacts():
         for row in cursor.fetchall():
             contacts.append(dict(zip(columns, row)))
         if len(contacts) > 0:
-            return {"result": contacts}
+            return {"contacts": contacts}
         else:
-            return {"result": None}
+            return {"contacts": None}
     except mysql.connector.Error as err:
-        return {"result": err}
+        return {"contacts": err}
     finally:
         if connection:
             connection.close()
