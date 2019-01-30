@@ -476,6 +476,11 @@ textarea{
     font-size: 16px;
 }
 
+#add-submit{
+  background-color: #337ab7;
+  font-size: 20px;
+}
+
 .login {
     background-color: white;
     max-width: 450px;
