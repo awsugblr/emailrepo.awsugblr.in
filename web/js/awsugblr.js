@@ -71,57 +71,35 @@ function showInvalidContacts(){
 }
 
 /* Add Contact */
-//TODO: Finish this function and modify values accordingly
-function addNewContact(request_login_details){
-    // var env_value = localStorage.getItem("snauth_env_value");
-	// var pwd = request_login_details.password;
-	// var confpwd = request_login_details.confpassword;
-	// if(request_login_details.email === '@bridgei2i.com' || request_login_details.name === '' || request_login_details.comments === '' || pwd === '' || confpwd === ''){
-	//     $("#error").text('*Please fill all mandatory fields.').css('visibility', 'visible');
-	// }
-	// else if(pwd !== confpwd || pwd.length < 7 || confpwd.length < 7){
-	// 	$("#error").text('*Password Mismatch.').css('visibility', 'visible');
-	// }
-	// else if((request_login_details.email).includes('@bridgei2i.com') && (request_login_details.email).length > 14){
-		if((request_login_details.email) && (request_login_details.password) && (request_login_details.name) && (request_login_details.comments))
-		{
-			$("#error").css('visibility', 'hidden');
-			passwordValue = SHA256(request_login_details.password)
-			login_api_url = "https://abc123mno987.execute-api.ap-south-1.amazonaws.com/snauth/" + env_value + "RequestLogin";
-			var obj = new Object();
-			obj.name = request_login_details.name;
-            obj.email = request_login_details.email;
-            obj.comments = request_login_details.comments;
-            obj.password = passwordValue;
+//TODO: troubleshoot why the response received is 415 - Unsupported Media Type
+function addNewContact(new_contact_details){
+    if((new_contact_details.email) && (new_contact_details.fullname))
+    {
+        $("#error").css('visibility', 'hidden');
+        newcontacturl = "https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/addnewcontact";
+        var obj = new Object();
+        obj.name = new_contact_details.email;
+        obj.email = new_contact_details.fullname;
 
-            var jsonObj = JSON.stringify(obj);
-			$.ajax({
-				url: login_api_url,
-				type: 'POST',
-				data: jsonObj,
-				dataType: 'json',
-				success: function(resp)
-				{
-					login_success = resp['result'];
-					if(login_success === "true"){
-						$("#error").text('Your request has been received and is under review. If this is urgent, please contact administrator.').css({'visibility':'visible','color':'green'});;
-						setTimeout(function(){ window.location = './index.html'; }, 5000);
-					}
-					else if(login_success === "user exists"){
-						$("#error").text('Error : User already exists with this Email Address.').css('visibility','visible');
-					}
-				},
-			});
-		}
-		// else{
-		// 	$("#error").text("*Please fill all mandatory fields.");
-		// 	$("#error").css('visibility', 'visible');
-		// }
-	// }
-	// else{
-	// 	$("#error").text("*Please use COMPANY Email ID to Register.");
-	// 	$("#error").css('visibility', 'visible');
-	// }
+        var jsonObj = JSON.stringify(obj);
+        $.ajax({
+            url: newcontacturl,
+            headers: { "X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG" },
+            type: 'POST',
+            data: jsonObj,
+            dataType: 'json',
+            success: function(resp)
+            {
+                newcontact_success = resp['result'];
+                if(newcontact_success === "true"){
+                    $("#error").text('New contact successfully added.').css({'visibility':'visible','color':'green'});;
+                }
+                else if(newcontact_success === "user exists"){
+                    $("#error").text('Error : Contact already exists with this email address.').css('visibility','visible');
+                }
+            },
+        });
+    }
 }
 
 /* Login */

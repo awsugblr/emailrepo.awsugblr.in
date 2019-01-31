@@ -21,7 +21,7 @@ def addnewcontact(email, fullname):
         for row in cursor.fetchall():
             contact = row[0]
         if contact != 0:
-            return {'result' : 'contact exists'}
+            return {"result" : "contact exists"}
         else:
             connection = mysql.connector.connect(host=dbconparamsjson["host"], user=dbconparamsjson["username"],
                                              password=dbconparamsjson["password"], database=dbconparamsjson["db"])
@@ -29,9 +29,9 @@ def addnewcontact(email, fullname):
             cursor = connection.cursor()
             cursor.execute(query)
             connection.commit()
-            return {"result": "true"}
+            return {"result": True}
     except mysql.connector.Error as err:
-        return {'result' : err}
+        return {"result" : err}
     finally:
         if connection:
             connection.close()
