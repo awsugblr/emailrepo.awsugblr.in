@@ -1,3 +1,68 @@
+// TODO - work on this from start
+$(document).on('click', '.make-active', function(){
+    var email = ($(this).parent().parent().parent().find("td:eq(2)").text()).trim();
+    var isyes = confirm('Are you sure, you want to make this user active?');
+    var allowuserurl = 'https://jthp9bhj27.execute-api.ap-south-1.amazonaws.com/serverless101/allowuser';
+
+    var obj = new Object();
+    obj.email = email;
+
+    var jsonObj = JSON.stringify(obj);
+
+    if(isyes) {
+        $.ajax({
+            url: allowuserurl,
+            headers: {"Content-Type": "application/json"},
+            type: 'PUT',
+            data: jsonObj,
+            dataType: 'json',
+            async: false,
+            success: function(data)
+            {
+                if(data['result']==="success")
+                {
+                    return true;
+                }
+            }
+        });
+    }
+    else {
+       return false;
+    }
+})
+
+// TODO - work on this from start
+$(document).on('click', '.make-invalid', function(){
+    var email = ($(this).parent().parent().parent().find("td:eq(2)").text()).trim();
+    var isyes = confirm('Are you sure, you want to block user?');
+    var blockuserurl = 'https://jthp9bhj27.execute-api.ap-south-1.amazonaws.com/serverless101/blockuser';
+    var obj = new Object();
+    obj.email = email;
+
+    var jsonObj = JSON.stringify(obj);
+
+    if(isyes) {
+        $.ajax({
+            url: blockuserurl,
+            headers: {"Content-Type": "application/json"},
+            type: 'PUT',
+            data: jsonObj,
+            dataType: 'json',
+            async: false,
+            success: function(data)
+            {
+                if(data['result']==="success")
+                {
+                    return true;
+                }
+            }
+        });
+    }
+    else {
+       return false;
+    }
+})
+
 /* Show Active Contacts */
 function showActiveContacts(){
     $("#error").css('visibility', 'hidden');
@@ -21,7 +86,7 @@ function showActiveContacts(){
             for(i=0;i<activecontacts.length;i++){
                 htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + activecontacts[i]['FullName'] +
                     '</td><td>' + activecontacts[i]['EmailAddress'] +
-                    '</td><td><div class="tooltip"><span class="tooltiptext">Edit</span><a href="" class="block-user" style="color:green;"><span class="fa fa-edit"></span></a></div></td></tr>';
+                    '</td><td><div class="tooltip"><span class="tooltiptext">Make Invalid</span><a href="" class="make-invalid" style="color:green;"><span class="fa fa-user-times"></span></a></div></td></tr>';
             }
 
             $('#contacts-list tbody').html(htmlcode);
@@ -53,7 +118,7 @@ function showInvalidContacts(){
                 htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + invalidcontacts[i]['FullName'] +
                     '</td><td>' + invalidcontacts[i]['EmailAddress'] +
                     '</td><td>' + invalidcontacts[i]['Comments'] +
-                    '</td><td><div class="tooltip"><span class="tooltiptext">Edit</span><a href="" class="block-user" style="color:green;"><span class="fa fa-edit"></span></a></div></td></tr>';
+                    '</td><td><div class="tooltip"><span class="tooltiptext">Make Active</span><a href="" class="make-active" style="color:green;"><span class="fa fa-user-plus"></span></a></div></td></tr>';
             }
 
             $('#contacts-list tbody').html(htmlcode);
