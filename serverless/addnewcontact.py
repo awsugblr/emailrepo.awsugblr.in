@@ -21,7 +21,7 @@ def addnewcontact(email, fullname):
         for row in cursor.fetchall():
             contact = row[0]
         if contact != 0:
-            return {"result" : "contact exists"}
+            return {"result" : False}
         else:
             connection = mysql.connector.connect(host=dbconparamsjson["host"], user=dbconparamsjson["username"],
                                              password=dbconparamsjson["password"], database=dbconparamsjson["db"])
