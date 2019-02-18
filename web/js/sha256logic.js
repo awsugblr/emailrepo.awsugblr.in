@@ -1,5 +1,5 @@
 
-/* Generated sha256 encrypted code for password*/
+/* Generated SHA256 encrypted code for password */
 function SHA256(s)
 {                
     var chrsz   = 8;

@@ -1,5 +1,6 @@
 /* Show Active Contacts */
 function showActiveContacts(){
+    $("#error").css('visibility', 'hidden');
     //get userid from browser local storage
     // var userid = localStorage.getItem("userid");
     //API Endpoint - Replace this with endpoint you created
@@ -16,13 +17,10 @@ function showActiveContacts(){
             var result = $.parseJSON(data);
             var activecontacts = result['contacts'];
             htmlcode = "";
-            // console.log(activecontacts.length);
 
             for(i=0;i<activecontacts.length;i++){
-                console.log(activecontacts[i]['FullName']);
                 htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + activecontacts[i]['FullName'] +
                     '</td><td>' + activecontacts[i]['EmailAddress'] +
-                    // '</td><td><span style="color:#4ef71b;text-align:center;" class="fa fa-circle"></span>' +
                     '</td><td><div class="tooltip"><span class="tooltiptext">Edit</span><a href="" class="block-user" style="color:green;"><span class="fa fa-edit"></span></a></div></td></tr>';
             }
 
@@ -33,6 +31,7 @@ function showActiveContacts(){
 
 /* Show Invalid Contacts */
 function showInvalidContacts(){
+    $("#error").css('visibility', 'hidden');
     //get userid from browser local storage
     // var userid = localStorage.getItem("userid");
     //API Endpoint - Replace this with endpoint you created
@@ -50,18 +49,10 @@ function showInvalidContacts(){
             invalidcontacts = result['contacts'];
             htmlcode = "";
 
-            // htmlcode += '<td>' + contactsinfo['FullName'] +
-            //         '</td><td>' + contactsinfo['EmailAddress'] +
-            //         '</td><td>' + contactsinfo['Comments'] +
-            //         '</td><td><span style="color:#4ef71b;text-align:center;" class="fa fa-circle"></span>' +
-            //         '</td><td><div class="tooltip"><span class="tooltiptext">Edit</span><a href="" class="block-user" style="color:red;"><span class="fa fa-ban"></span></a></div></td></tr>';
-
             for(i=0;i<invalidcontacts.length;i++){
-                console.log(invalidcontacts[i]['FullName']);
                 htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + invalidcontacts[i]['FullName'] +
                     '</td><td>' + invalidcontacts[i]['EmailAddress'] +
                     '</td><td>' + invalidcontacts[i]['Comments'] +
-                    // '</td><td><span style="color:#4ef71b;text-align:center;" class="fa fa-circle"></span>' +
                     '</td><td><div class="tooltip"><span class="tooltiptext">Edit</span><a href="" class="block-user" style="color:green;"><span class="fa fa-edit"></span></a></div></td></tr>';
             }
 
@@ -71,31 +62,30 @@ function showInvalidContacts(){
 }
 
 /* Add Contact */
-//TODO: troubleshoot why the response received is 415 - Unsupported Media Type
-function addNewContact(new_contact_details){
-    if((new_contact_details.email) && (new_contact_details.fullname))
+function addNewContact(newcontactdetails){
+    if((newcontactdetails.email) && (newcontactdetails.fullname))
     {
         $("#error").css('visibility', 'hidden');
         newcontacturl = "https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/addnewcontact";
         var obj = new Object();
-        obj.name = new_contact_details.email;
-        obj.email = new_contact_details.fullname;
+        obj.email = newcontactdetails.email;
+        obj.fullname = newcontactdetails.fullname;
 
         var jsonObj = JSON.stringify(obj);
         $.ajax({
             url: newcontacturl,
-            headers: { "X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG" },
+            headers: { "X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG", "Content-Type": "application/json" },
             type: 'POST',
             data: jsonObj,
             dataType: 'json',
             success: function(resp)
             {
-                newcontact_success = resp['result'];
-                if(newcontact_success === "true"){
-                    $("#error").text('New contact successfully added.').css({'visibility':'visible','color':'green'});;
+                newcontactsuccess = resp['result'];
+                if(newcontactsuccess === true){
+                    $("#error").text('New contact successfully added.').css({'visibility':'visible','color':'green'});
                 }
-                else if(newcontact_success === "user exists"){
-                    $("#error").text('Error : Contact already exists with this email address.').css('visibility','visible');
+                else if(newcontactsuccess === false){
+                    $("#error").text('Error : Contact already exists with this email address.').css('visibility', 'visible');
                 }
             },
         });
@@ -103,24 +93,24 @@ function addNewContact(new_contact_details){
 }
 
 /* Login */
-function login(auth_details)
+function login(authdetails)
 {
 	var result = null;
-    if((auth_details.email) && (auth_details.password))
+    if((authdetails.email) && (authdetails.password))
     {
         $("#error").css('visibility', 'hidden');
-        passwordValue = SHA256(auth_details.password)
+        passwordValue = SHA256(authdetails.password)
         //API Endpoint - Replace this with endpoint you created
         loginurl = 'https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/login';
         var obj = new Object();
-        obj.email = auth_details.email;
+        obj.email = authdetails.email;
         obj.password = passwordValue;
 
         var jsonObj = JSON.stringify(obj);
 
         $.ajax({
             url: loginurl,
-            headers: { "X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG" },
+            headers: { "X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG", "Content-Type": "application/json" },
             type: 'POST',
             data: jsonObj,
             dataType: 'json',
