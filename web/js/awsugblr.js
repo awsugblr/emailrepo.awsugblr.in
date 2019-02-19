@@ -1,8 +1,8 @@
-// TODO - work on this from start
+/* Make Contact Active */
 $(document).on('click', '.make-active', function(){
     var email = ($(this).parent().parent().parent().find("td:eq(2)").text()).trim();
-    var isyes = confirm('Are you sure, you want to make this user active?');
-    var allowuserurl = 'https://jthp9bhj27.execute-api.ap-south-1.amazonaws.com/serverless101/allowuser';
+    var isyes = confirm('Do you want to make this contact active?');
+    var activecontacturl = 'https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/activecontact';
 
     var obj = new Object();
     obj.email = email;
@@ -11,8 +11,8 @@ $(document).on('click', '.make-active', function(){
 
     if(isyes) {
         $.ajax({
-            url: allowuserurl,
-            headers: {"Content-Type": "application/json"},
+            url: activecontacturl,
+            headers: {"X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG", "Content-Type": "application/json"},
             type: 'PUT',
             data: jsonObj,
             dataType: 'json',
@@ -31,11 +31,11 @@ $(document).on('click', '.make-active', function(){
     }
 })
 
-// TODO - work on this from start
+/* Make Contact Invalid */
 $(document).on('click', '.make-invalid', function(){
     var email = ($(this).parent().parent().parent().find("td:eq(2)").text()).trim();
-    var isyes = confirm('Are you sure, you want to block user?');
-    var blockuserurl = 'https://jthp9bhj27.execute-api.ap-south-1.amazonaws.com/serverless101/blockuser';
+    var isyes = confirm('Do you want to make this contact invalid?');
+    var invalidcontacturl = 'https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/invalidcontact';
     var obj = new Object();
     obj.email = email;
 
@@ -43,8 +43,8 @@ $(document).on('click', '.make-invalid', function(){
 
     if(isyes) {
         $.ajax({
-            url: blockuserurl,
-            headers: {"Content-Type": "application/json"},
+            url: invalidcontacturl,
+            headers: {"X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG", "Content-Type": "application/json"},
             type: 'PUT',
             data: jsonObj,
             dataType: 'json',
@@ -113,12 +113,13 @@ function showInvalidContacts(){
             var result = $.parseJSON(data);
             invalidcontacts = result['contacts'];
             htmlcode = "";
-
-            for(i=0;i<invalidcontacts.length;i++){
-                htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + invalidcontacts[i]['FullName'] +
-                    '</td><td>' + invalidcontacts[i]['EmailAddress'] +
-                    '</td><td>' + invalidcontacts[i]['Comments'] +
-                    '</td><td><div class="tooltip"><span class="tooltiptext">Make Active</span><a href="" class="make-active" style="color:green;"><span class="fa fa-user-plus"></span></a></div></td></tr>';
+            if(invalidcontacts != null) {
+                for(i=0;i<invalidcontacts.length;i++){
+                    htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + invalidcontacts[i]['FullName'] +
+                        '</td><td>' + invalidcontacts[i]['EmailAddress'] +
+                        '</td><td>' + invalidcontacts[i]['Comments'] +
+                        '</td><td><div class="tooltip"><span class="tooltiptext">Make Active</span><a href="" class="make-active" style="color:green;"><span class="fa fa-user-plus"></span></a></div></td></tr>';
+                }
             }
 
             $('#contacts-list tbody').html(htmlcode);
