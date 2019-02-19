@@ -11,3 +11,5 @@ clean:
 	rm -f activecontacts.zip
 	rm -f addnewcontact.zip
 	rm -f invalidcontacts.zip
+	rm -f activecontact.zip
+	rm -f invalidcontact.zip

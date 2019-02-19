@@ -1,3 +1,68 @@
+/* Make Contact Active */
+$(document).on('click', '.make-active', function(){
+    var email = ($(this).parent().parent().parent().find("td:eq(2)").text()).trim();
+    var isyes = confirm('Do you want to make this contact active?');
+    var activecontacturl = 'https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/activecontact';
+
+    var obj = new Object();
+    obj.email = email;
+
+    var jsonObj = JSON.stringify(obj);
+
+    if(isyes) {
+        $.ajax({
+            url: activecontacturl,
+            headers: {"X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG", "Content-Type": "application/json"},
+            type: 'PUT',
+            data: jsonObj,
+            dataType: 'json',
+            async: false,
+            success: function(data)
+            {
+                if(data['result']==="success")
+                {
+                    return true;
+                }
+            }
+        });
+    }
+    else {
+       return false;
+    }
+})
+
+/* Make Contact Invalid */
+$(document).on('click', '.make-invalid', function(){
+    var email = ($(this).parent().parent().parent().find("td:eq(2)").text()).trim();
+    var isyes = confirm('Do you want to make this contact invalid?');
+    var invalidcontacturl = 'https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/invalidcontact';
+    var obj = new Object();
+    obj.email = email;
+
+    var jsonObj = JSON.stringify(obj);
+
+    if(isyes) {
+        $.ajax({
+            url: invalidcontacturl,
+            headers: {"X-API-KEY": "6hBxkhk75V9y2ivgl23jy1958LATIZULaA7e1mBG", "Content-Type": "application/json"},
+            type: 'PUT',
+            data: jsonObj,
+            dataType: 'json',
+            async: false,
+            success: function(data)
+            {
+                if(data['result']==="success")
+                {
+                    return true;
+                }
+            }
+        });
+    }
+    else {
+       return false;
+    }
+})
+
 /* Show Active Contacts */
 function showActiveContacts(){
     $("#error").css('visibility', 'hidden');
@@ -21,7 +86,7 @@ function showActiveContacts(){
             for(i=0;i<activecontacts.length;i++){
                 htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + activecontacts[i]['FullName'] +
                     '</td><td>' + activecontacts[i]['EmailAddress'] +
-                    '</td><td><div class="tooltip"><span class="tooltiptext">Edit</span><a href="" class="block-user" style="color:green;"><span class="fa fa-edit"></span></a></div></td></tr>';
+                    '</td><td><div class="tooltip"><span class="tooltiptext">Make Invalid</span><a href="" class="make-invalid" style="color:green;"><span class="fa fa-user-times"></span></a></div></td></tr>';
             }
 
             $('#contacts-list tbody').html(htmlcode);
@@ -48,12 +113,13 @@ function showInvalidContacts(){
             var result = $.parseJSON(data);
             invalidcontacts = result['contacts'];
             htmlcode = "";
-
-            for(i=0;i<invalidcontacts.length;i++){
-                htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + invalidcontacts[i]['FullName'] +
-                    '</td><td>' + invalidcontacts[i]['EmailAddress'] +
-                    '</td><td>' + invalidcontacts[i]['Comments'] +
-                    '</td><td><div class="tooltip"><span class="tooltiptext">Edit</span><a href="" class="block-user" style="color:green;"><span class="fa fa-edit"></span></a></div></td></tr>';
+            if(invalidcontacts != null) {
+                for(i=0;i<invalidcontacts.length;i++){
+                    htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + invalidcontacts[i]['FullName'] +
+                        '</td><td>' + invalidcontacts[i]['EmailAddress'] +
+                        '</td><td>' + invalidcontacts[i]['Comments'] +
+                        '</td><td><div class="tooltip"><span class="tooltiptext">Make Active</span><a href="" class="make-active" style="color:green;"><span class="fa fa-user-plus"></span></a></div></td></tr>';
+                }
             }
 
             $('#contacts-list tbody').html(htmlcode);
