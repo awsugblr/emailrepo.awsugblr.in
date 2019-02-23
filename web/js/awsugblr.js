@@ -65,7 +65,7 @@ $(document).on('click', '.make-invalid', function(){
 
 /* Show Active Contacts */
 function showActiveContacts(){
-    $("#error").css('visibility', 'hidden');
+    // $("#error").css('visibility', 'hidden');
     //get userid from browser local storage
     // var userid = localStorage.getItem("userid");
     //API Endpoint - Replace this with endpoint you created
@@ -96,7 +96,7 @@ function showActiveContacts(){
 
 /* Show Invalid Contacts */
 function showInvalidContacts(){
-    $("#error").css('visibility', 'hidden');
+    // $("#error").css('visibility', 'hidden');
     //get userid from browser local storage
     // var userid = localStorage.getItem("userid");
     //API Endpoint - Replace this with endpoint you created
@@ -117,7 +117,6 @@ function showInvalidContacts(){
                 for(i=0;i<invalidcontacts.length;i++){
                     htmlcode += '<tr><td>'+ (i+1) + '</td><td>' + invalidcontacts[i]['FullName'] +
                         '</td><td>' + invalidcontacts[i]['EmailAddress'] +
-                        '</td><td>' + invalidcontacts[i]['Comments'] +
                         '</td><td><div class="tooltip"><span class="tooltiptext">Make Active</span><a href="" class="make-active" style="color:green;"><span class="fa fa-user-plus"></span></a></div></td></tr>';
                 }
             }
@@ -148,10 +147,12 @@ function addNewContact(newcontactdetails){
             {
                 newcontactsuccess = resp['result'];
                 if(newcontactsuccess === true){
-                    $("#error").text('New contact successfully added.').css({'visibility':'visible','color':'green'});
+                    $("#error").text('*New contact successfully added.').css({'visibility':'visible','color':'green'});
+                    $("#error").css('visibility', 'visible');
                 }
                 else if(newcontactsuccess === false){
-                    $("#error").text('Error : Contact already exists with this email address.').css('visibility', 'visible');
+                    $("#error").text('*Contact already exists with this email address.').css({'visibility':'visible','color':'red'});
+                    $("#error").css('visibility', 'visible');
                 }
             },
         });
