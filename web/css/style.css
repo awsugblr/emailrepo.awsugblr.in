@@ -441,11 +441,6 @@ textarea{
     padding: 22px 0px 22px 0px;
 }
 
-#common-error {
-    color: red;
-    visibility: hidden;
-}
-
 .blocktooltiptext {
     width: 100px;
     visibility: hidden;
