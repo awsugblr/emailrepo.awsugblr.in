@@ -149,6 +149,8 @@ function addNewContact(newcontactdetails){
                 if(newcontactsuccess === true){
                     $("#error").text('*New contact successfully added.').css({'visibility':'visible','color':'green'});
                     $("#error").css('visibility', 'visible');
+                    $("#email").val("");
+                    $("#fullname").val("");
                 }
                 else if(newcontactsuccess === false){
                     $("#error").text('*Contact already exists with this email address.').css({'visibility':'visible','color':'red'});
