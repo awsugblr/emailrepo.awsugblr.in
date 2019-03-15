@@ -71,7 +71,7 @@
                             </div>
                             <div class="row">
                                 <div id="fullname-input" class="col-md-2">*Full Name:</div>
-                                <input class="col-md-7 common-style-input set-email-style" type="text" id="fullname" required="required" maxlength="100" autofocus/>
+                                <input class="col-md-7 common-style-input set-email-style" type="text" id="fullname" required="required" maxlength="100" onkeypress="onKeyPressAddContact(event)"/>
 							</div>
 							<div class="row">
 								<div class="col-sm-4"></div>
@@ -80,7 +80,6 @@
 								</div>
 								<div class="col-sm-4"></div>
 							</div>
-
                             <div class="clear"></div>
                         </form>
                     </div>
@@ -91,6 +90,7 @@
 				</div>
 			</div><!--/.row-->
 		</div>	<!--/.main-->
-    <script src="js/awsugblr.js"></script>
+		<script src="js/keypress.js"></script>
+		<script src="js/awsugblr.js"></script>
     </body>
 </html>
