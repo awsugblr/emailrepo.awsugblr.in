@@ -65,9 +65,6 @@ $(document).on('click', '.make-invalid', function(){
 
 /* Show Active Contacts */
 function showActiveContacts(){
-    // $("#error").css('visibility', 'hidden');
-    //get userid from browser local storage
-    // var userid = localStorage.getItem("userid");
     //API Endpoint - Replace this with endpoint you created
     var activecontactsurl = 'https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/activecontacts';
 
@@ -96,9 +93,6 @@ function showActiveContacts(){
 
 /* Show Invalid Contacts */
 function showInvalidContacts(){
-    // $("#error").css('visibility', 'hidden');
-    //get userid from browser local storage
-    // var userid = localStorage.getItem("userid");
     //API Endpoint - Replace this with endpoint you created
     var invalidcontactsurl = 'https://4mrf7a6hek.execute-api.ap-south-1.amazonaws.com/dev/invalidcontacts';
 
@@ -151,10 +145,12 @@ function addNewContact(newcontactdetails){
                     $("#error").css('visibility', 'visible');
                     $("#email").val("");
                     $("#fullname").val("");
+                    $("#email").focus();
                 }
                 else if(newcontactsuccess === false){
                     $("#error").text('*Contact already exists with this email address.').css({'visibility':'visible','color':'red'});
                     $("#error").css('visibility', 'visible');
+                    $("#email").focus();
                 }
             },
         });
