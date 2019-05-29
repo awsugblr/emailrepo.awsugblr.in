@@ -2,7 +2,7 @@ import boto3
 
 dynamodb = boto3.resource('dynamodb')
 
-dynamodb.create_table(
+table = dynamodb.create_table(
 	TableName='Users',
 	KeySchema=[
 		{
@@ -23,10 +23,13 @@ dynamodb.create_table(
 			'AttributeName': 'full_name',
 			'AttributeType': 'S'
 		}
-	]
+	],
+	ProvisionedThroughput={
+		"ReadCapacityUnits": 5,
+		"WriteCapacityUnits": 5
+	}
 )
 
 # Wait until the table exists.
 table.meta.client.get_waiter('table_exists').wait(TableName='Users')
-
-print(table.creation_date_time)
+print("Successfully created the table Users on", table.creation_date_time)

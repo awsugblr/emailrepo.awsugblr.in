@@ -1,0 +1,10 @@
+1. Edit the credentials file with your AWS ACCESS_KEY and SECRET_KEY
+(Remember to use keys with least privileges - for eg, if only DynamoDB is required create an IAM credential with just that service)
+
+2. Execute the setupCreds.sh
+(This will copy the credentials under the ~/.aws folder where Boto3 checks for it)
+
+3. You can now run 'aws configure' (if needed) to further customize your settings like region, output format etc...
+
+4. After this is done, you should be able to run the ../CreateTable*.py or ../DeleteTable*.py individual scripts
+(You can try the InvokeCreateTables.py or InvokeDeleteTables.py script for one shot invokation as well)
